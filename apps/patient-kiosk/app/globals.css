@@ -1,0 +1,231 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 240 10% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 15%;
+    --primary: 173 89% 29%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 207 70% 60%;
+    --secondary-foreground: 240 10% 15%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 173 89% 29%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Custom Healthcare Styles */
+.medical-card {
+  @apply bg-card border border-border rounded-lg shadow-sm transition-all;
+}
+
+.medical-card:hover {
+  @apply shadow-md border-primary/20;
+}
+
+.medical-button-primary {
+  @apply bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-6 py-3 rounded-lg transition-all shadow-sm hover:shadow;
+}
+
+.medical-button-secondary {
+  @apply bg-secondary hover:bg-secondary/90 text-secondary-foreground font-medium px-6 py-3 rounded-lg transition-all;
+}
+
+.medical-button-outline {
+  @apply border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-medium px-6 py-3 rounded-lg transition-all;
+}
+
+.medical-input {
+  @apply w-full px-4 py-3 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all;
+}
+
+.medical-label {
+  @apply block text-sm font-medium text-foreground mb-2;
+}
+
+/* Voice Animation */
+@keyframes voice-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+.voice-active {
+  animation: voice-pulse 1.5s ease-in-out infinite;
+}
+
+/* Progress Steps */
+.step-indicator {
+  @apply flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all;
+}
+
+.step-active {
+  @apply bg-primary border-primary text-primary-foreground;
+}
+
+.step-completed {
+  @apply bg-primary/10 border-primary text-primary;
+}
+
+.step-pending {
+  @apply bg-muted border-muted-foreground/20 text-muted-foreground;
+}
+
+/* Skeleton Loading */
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  @apply bg-gradient-to-r from-muted via-muted-foreground/10 to-muted;
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+/* Document Viewer */
+.document-viewer {
+  @apply relative bg-muted/30 rounded-lg overflow-hidden;
+}
+
+.document-viewer img {
+  @apply w-full h-auto object-contain;
+}
+
+/* Timeline */
+.timeline-item {
+  @apply relative pl-8 pb-8 border-l-2 border-muted-foreground/20;
+}
+
+.timeline-item::before {
+  @apply absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-background;
+  content: '';
+}
+
+.timeline-item:last-child {
+  @apply border-l-0;
+}
+
+/* Alert Styles */
+.alert-critical {
+  @apply bg-destructive/10 border-l-4 border-destructive text-destructive-foreground;
+}
+
+.alert-warning {
+  @apply bg-medical-amber-light border-l-4 border-medical-amber text-medical-amber;
+}
+
+.alert-info {
+  @apply bg-medical-blue-light border-l-4 border-medical-blue text-medical-blue;
+}
+
+/* Accessibility */
+.sr-only {
+  @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* Touch Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+  
+  button, a, [role="button"] {
+    @apply min-h-[44px];
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --border: 240 10% 20%;
+    --input: 240 10% 20%;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Hindi Font Support */
+.font-hindi {
+  font-family: 'Noto Sans Devanagari', system-ui, sans-serif;
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    @apply bg-white text-black;
+  }
+  
+  .medical-card {
+    @apply shadow-none border-black;
+  }
+}
+
+/* Focus Visible */
+*:focus-visible {
+  @apply outline-none ring-2 ring-ring ring-offset-2;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/50;
+}

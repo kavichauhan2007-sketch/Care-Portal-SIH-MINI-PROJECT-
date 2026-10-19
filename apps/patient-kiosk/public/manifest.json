@@ -1,0 +1,10 @@
+{
+  "name": "CarePortal Patient Kiosk",
+  "short_name": "CarePortal",
+  "description": "AI-Powered Clinical Intake & Patient Registration Kiosk",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#00685f",
+  "icons": []
+}
